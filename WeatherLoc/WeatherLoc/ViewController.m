@@ -69,17 +69,17 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-   
+    
     [locationManager stopUpdatingLocation];
 }
 
 #pragma mark - map
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation {
-   
+    
     [self centerUserLocation];
     [self.recentWeatherTableView reloadData];
-
+    
     [self fetchWeatherFromWeb];
     
     // Fetch the data from persistent data store
@@ -92,15 +92,26 @@
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-   
+    
     if (self.weatherMapView.userLocation == annotation){
         MKAnnotationView *annotationView = [mapView viewForAnnotation:self.weatherMapView.userLocation];
         annotationView.canShowCallout = YES;
         
-        self.weatherMapView.userLocation.title = mNeighborhood;
-        self.weatherMapView.userLocation.subtitle = mTemperature;
+        self.weatherMapView.userLocation.title = @"Here";
+        self.weatherMapView.userLocation.subtitle = @"0.0";
     }
     return nil;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    
+    if (self.weatherMapView.userLocation == view.annotation){
+        MKAnnotationView *annotationView = [mapView viewForAnnotation:self.weatherMapView.userLocation];
+        annotationView.canShowCallout = YES;
+        
+        self.weatherMapView.userLocation.title =  mNeighborhood;
+        self.weatherMapView.userLocation.subtitle = [NSString stringWithFormat:@"%@ K. Degrees", mTemperature];
+    }
 }
 
 - (void)centerUserLocation {
@@ -139,7 +150,7 @@
         
         NSManagedObject *dayWeather = [weatherDataArray objectAtIndex:(entriesCount - 1 - indexPath.row)];
         
-        [cell.textLabel setText:[NSString stringWithFormat:@"%@ - %@ Degrees", [dayWeather valueForKey:@"locationName"], [dayWeather valueForKey:@"temperature"]]];
+        [cell.textLabel setText:[NSString stringWithFormat:@"%@ - %@ K. Degrees", [dayWeather valueForKey:@"locationName"], [dayWeather valueForKey:@"temperature"]]];
         [cell.detailTextLabel setText:[NSString stringWithFormat:@"%@ - %@", [dayWeather valueForKey:@"weatherDescription"], [dayWeather valueForKey:@"humidity"]]];
     }
     
@@ -179,12 +190,12 @@
 
 #pragma mark - weather and Location apis
 - (void)fetchWeatherFromWeb {
-  
+    
     WLApiManager *manager = [[WLApiManager alloc] init];
     
     //get weather data
     NSString* cordParams = [NSString stringWithFormat:@"lat=%@&lon=%@&", [[NSString alloc] initWithFormat:@"%f", locationManager.location.coordinate.latitude], [[NSString alloc] initWithFormat:@"%f", locationManager.location.coordinate.longitude]];
-
+    
     [manager getApiCallToEndpoint:[NSString stringWithFormat:@"%@%@%@", WEATHER_BASE_URL, cordParams, WEATHER_API_KEY] withParams:nil onCompletion:^(id data, BOOL success) {
         if (success) {
             
@@ -215,6 +226,11 @@
             }
             [self saveWeatherDescitpion:mWeatherDesc andTemperature:mTemperature andHumidity:mHumidity andLatitude:mLatitude andLongitude:mLongitude andLocationName:mNeighborhood];
             
+            // Fetch the data from persistent data store
+            NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+            NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"PlaceEntity"];
+            weatherDataArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+            entriesCount = (int)weatherDataArray.count;
             [self.recentWeatherTableView reloadData];
         }
         else{
