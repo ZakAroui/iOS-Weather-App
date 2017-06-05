@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="E69-VN-Xaq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SV1-bp-QWh" userLabel="map container">
+                                <rect key="frame" x="0.0" y="333" width="375" height="334"/>
+                                <subviews>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DDj-jt-uX5">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="334"/>
+                                    </mapView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="DDj-jt-uX5" secondAttribute="trailing" id="169-SF-esL"/>
+                                    <constraint firstAttribute="bottom" secondItem="DDj-jt-uX5" secondAttribute="bottom" id="AyT-a6-gdZ"/>
+                                    <constraint firstItem="DDj-jt-uX5" firstAttribute="leading" secondItem="SV1-bp-QWh" secondAttribute="leading" id="Bt0-Ag-MAt"/>
+                                    <constraint firstItem="DDj-jt-uX5" firstAttribute="top" secondItem="SV1-bp-QWh" secondAttribute="top" id="tbB-Z1-8Ci"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cED-g7-nGM" userLabel="table container">
+                                <rect key="frame" x="0.0" y="20" width="375" height="313"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EmM-6C-Xso">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="313"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="dayCellReuse" textLabel="sk1-4h-Du8" detailTextLabel="Jfz-IE-LUU" style="IBUITableViewCellStyleSubtitle" id="dYs-Um-qBx">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dYs-Um-qBx" id="1cW-Yb-lEw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sk1-4h-Du8">
+                                                            <rect key="frame" x="15" y="4" width="34" height="21"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Jfz-IE-LUU">
+                                                            <rect key="frame" x="15" y="25" width="44" height="15"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="2v6-Bw-k4v"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="RMh-ax-7KM"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="EmM-6C-Xso" secondAttribute="bottom" id="EZp-iK-C99"/>
+                                    <constraint firstItem="EmM-6C-Xso" firstAttribute="top" secondItem="cED-g7-nGM" secondAttribute="top" id="PA1-V0-Rds"/>
+                                    <constraint firstAttribute="trailing" secondItem="EmM-6C-Xso" secondAttribute="trailing" id="RuZ-9f-RG9"/>
+                                    <constraint firstItem="EmM-6C-Xso" firstAttribute="leading" secondItem="cED-g7-nGM" secondAttribute="leading" id="mEX-L5-DBJ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="cED-g7-nGM" firstAttribute="leading" secondItem="E69-VN-Xaq" secondAttribute="leading" id="4Bd-cx-G5C"/>
+                            <constraint firstItem="cED-g7-nGM" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Ix5-Xs-13Y"/>
+                            <constraint firstItem="SV1-bp-QWh" firstAttribute="height" secondItem="E69-VN-Xaq" secondAttribute="height" multiplier="0.5" id="IyA-bm-4tb"/>
+                            <constraint firstItem="SV1-bp-QWh" firstAttribute="leading" secondItem="E69-VN-Xaq" secondAttribute="leading" id="U3l-jF-2Ce"/>
+                            <constraint firstItem="cED-g7-nGM" firstAttribute="bottom" secondItem="SV1-bp-QWh" secondAttribute="top" id="WzX-JI-a1r"/>
+                            <constraint firstAttribute="trailing" secondItem="SV1-bp-QWh" secondAttribute="trailing" id="eyx-nH-rQi"/>
+                            <constraint firstAttribute="trailing" secondItem="cED-g7-nGM" secondAttribute="trailing" id="g5F-ji-aBh"/>
+                            <constraint firstAttribute="bottom" secondItem="SV1-bp-QWh" secondAttribute="bottom" id="yJt-fu-6sq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="recentWeatherTableView" destination="EmM-6C-Xso" id="li8-ej-fNT"/>
+                        <outlet property="weatherMapView" destination="DDj-jt-uX5" id="Rly-TI-nxl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="29.600000000000001" y="78.710644677661179"/>
+        </scene>
+    </scenes>
+</document>
